@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Weather App</title>
+
+    <style>
+        body {
+          font-family: 'Arial', sans-serif;
+          background-color: #f0f0f0;
+          margin: 0;
+          padding: 0;
+        }
+    
+        #navbar {
+          background-color: #333;
+          color: white;
+          padding: 10px;
+          text-align: center;
+        }
+    
+        #navbar a {
+          text-decoration: none;
+          color: white;
+          margin: 0 10px;
+        }
+    
+        #navbar a:hover {
+          text-decoration: underline;
+        }
+    
+        h2 {
+          color: #333;
+        }
+    
+        form {
+          margin: 30px auto;
+          width: 90%;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    
+        form h2 {
+          margin: 0 0 20px 0;
+          color: #333;
+        }
+    
+        form label {
+          display: block;
+          margin-bottom: 5px;
+          color: #555;
+        }
+    
+        form input {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+    
+        button {
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          padding: 10px 15px;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+    
+        button:hover {
+          background-color: #0056b3;
+        }
+    
+        .container {
+          width: 75%;
+          margin: 20px auto;
+        }
+    
+        .card {
+          background-color: #fff;
+          border: 1px solid #ddd;
+          border-radius: 8px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    
+        .card-title {
+          margin: 10px 0;
+          color: #333;
+        }
+    
+        .info {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+    
+        .right {
+          text-align: right;
+        }
+    
+        .left img {
+          max-width: 60px;
+        }
+    
+        h5 {
+          color: #555;
+        }
+        .Heading {
+            background-color: #007BFF; 
+            color: white; 
+            padding: 20px;
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            text-align: center; 
+        }
+
+        .Heading h2 {
+            margin: 0; 
+            font-size: 1.5em;
+        }
+    </style>
+    
+      
+</head>
+
+<body>
+    
+    <div id="navbar">
+        <a href="#">Home</a> |
+        <a href="/About">About</a>
+    </div>
+    <div class ="Heading">
+        <div>
+            <h2>Want to know about Weather. You are at the right place</h2>
+        </div>
+    </div>
+    <center><form class="container" method="post">
+      <h2><i class="bi bi-cloud-haze"></i>Weather App</h2>
+
+      <div class="form-group">
+        <label>City Name</label>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="City Name"
+          name="name"
+          required
+        />
+      </div>
+
+      <br />
+      <button type="submit" class="btn btn-primary">Search Now</button>
+    </form></center>
+
+    <center><div class="container">
+        {% if finalresponse %}
+            <div class="row">
+                <div class="col">
+                <div class="card text-dark bg-white mb-3" style="max-width: 20rem">
+                    <div class="card-body">
+                    <h1 class="card-title">{{ city_name }}</h1>
+                    <div class="info">
+                        <div class="right">
+                        <h3 class="card-text">{{ temp }}&deg;C</h3>
+                        <h4 class="card-text">{{ weather }}</h4>
+
+                        </div>
+                        <div class="left">
+                        &nbsp;&nbsp;
+
+                        <img src="http://openweathermap.org/img/w/{{icon}}.png" alt="" />
+                        </div>
+                    </div>
+
+                    <br />
+                    <h5>Min Temp : {{min_temp}}&deg;C</h5>
+                    <h5>Max Temp : {{max_temp}}&deg;C</h5>
+                    </div>
+                </div>
+                </div>
+            </div>
+        {% endif %}
+    </div></center>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <center><ul class="flashes">
+        {% for category, message in messages %}
+        <h2 class="{{ category }}">{{ message }}</h2>
+        {% endfor %}
+    </ul></center>
+    {% endif %}
+    {% endwith %}
+</body>
+</html>
